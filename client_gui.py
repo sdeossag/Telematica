@@ -4,9 +4,9 @@ import tkinter as tk
 from tkinter import messagebox
 
 # ---------------- CONFIGURACIÓN ----------------
-HOST = "127.0.0.1"
+HOST = "100.24.14.26"
 PORT = 8080
-is_admin = True  # Cambia a False si quieres probar un cliente normal
+is_admin = False  # Cambia a False si quieres probar un cliente normal
 
 # ---------------- CLASE CLIENTE ----------------
 class RobotClient:

@@ -1,0 +1,212 @@
+Perfecto, Samuel.
+Aquí tienes el texto para tu archivo **setup.txt**, escrito con tono académico, formal y natural, como lo presentaría un estudiante de 18 años. No tiene emojis ni lenguaje informal, y está estructurado para cumplir con el requisito del proyecto.
+
+---
+
+# setup.txt
+
+## Proyecto: Sistema de Comunicación RTLP
+
+### Asignatura: Telemática
+
+### Integrantes:
+
+* Samuel Deossa Gómez
+* [Agrega los nombres de tus compañeros si los hay]
+
+---
+
+## 1. Descripción general
+
+El proyecto consiste en la implementación de un sistema de comunicación cliente-servidor basado en el **protocolo RTLP (Robot Telemetry and Logistics Protocol)**.
+El servidor fue desarrollado en **lenguaje C** utilizando la API de **sockets Berkeley (Winsock2)** y los clientes fueron desarrollados en **Python** y **Java**.
+El sistema permite el intercambio de datos de telemetría (temperatura, humedad, presión y CO₂) entre un servidor y varios clientes conectados simultáneamente mediante TCP.
+
+---
+
+## 2. Requisitos previos
+
+### 2.1. Sistema operativo
+
+El proyecto fue probado en **Windows 10** y **Windows 11**.
+
+### 2.2. Software necesario
+
+Para compilar y ejecutar el proyecto es necesario tener instalados los siguientes componentes:
+
+1. **MinGW-w64**
+
+   * Se utiliza para compilar el código C.
+   * Descargar desde: [https://winlibs.com/](https://winlibs.com/)
+   * Descomprimir la carpeta y agregar la ruta del directorio `bin` al **Path** del sistema.
+     Ejemplo:
+
+     ```
+     C:\Users\ASUS\Downloads\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\mingw64\bin
+     ```
+
+2. **Python 3.12 o superior**
+
+   * Descargar desde: [https://www.python.org/downloads/](https://www.python.org/downloads/)
+   * Durante la instalación, seleccionar la opción **Add Python to PATH**.
+   * Verificar instalación:
+
+     ```
+     python --version
+     ```
+
+3. **Java JDK 21 o superior**
+
+   * Descargar desde: [https://adoptium.net/](https://adoptium.net/)
+   * Agregar la variable de entorno `JAVA_HOME` y añadir `bin` al PATH.
+   * Verificar instalación:
+
+     ```
+     java --version
+     javac --version
+     ```
+
+4. **Visual Studio Code** (opcional)
+
+   * Editor recomendado para modificar o visualizar el código fuente.
+
+---
+
+## 3. Estructura del proyecto
+
+```
+TelematicaEntrega1/
+├── server.c
+├── telemetry.c
+├── telemetry.h
+├── server.exe
+├── client_python.py
+├── client_gui.py
+├── ClientJava.java
+├── ClientGUI.java
+└── logs.txt
+```
+
+* `server.c`, `telemetry.c` y `telemetry.h`: Código fuente del servidor RTLP.
+* `server.exe`: Ejecutable del servidor generado con MinGW.
+* `client_python.py`: Cliente de consola en Python.
+* `client_gui.py`: Cliente con interfaz gráfica en Python (Tkinter).
+* `ClientJava.java`: Cliente de consola en Java.
+* `ClientGUI.java`: Cliente con interfaz gráfica en Java (Swing).
+* `logs.txt`: Archivo donde se almacenan los registros del servidor.
+
+---
+
+## 4. Compilación del servidor
+
+1. Abrir una terminal PowerShell en la carpeta del proyecto.
+2. Ejecutar el siguiente comando para compilar el servidor:
+
+   ```
+   gcc server.c telemetry.c -o server.exe -lws2_32
+   ```
+3. Si la compilación es correcta, se generará el archivo `server.exe` en la misma carpeta.
+
+---
+
+## 5. Ejecución del sistema
+
+### 5.1. Ejecutar el servidor
+
+En una ventana de PowerShell:
+
+```
+.\server.exe 8080 logs.txt
+```
+
+El servidor quedará escuchando conexiones en el puerto 8080 y registrará toda la actividad en el archivo `logs.txt`.
+Si la ejecución es correcta, se mostrará el mensaje:
+
+```
+[LOG] Server listening...
+```
+
+---
+
+### 5.2. Ejecutar el cliente en Python (versión consola)
+
+Abrir otra ventana de PowerShell en la misma carpeta y escribir:
+
+```
+python client_python.py
+```
+
+El cliente se conectará al servidor, enviará un inicio de sesión y solicitará los datos de telemetría.
+
+---
+
+### 5.3. Ejecutar el cliente en Python (versión gráfica)
+
+Para abrir la versión con interfaz (Tkinter):
+
+```
+python client_gui.py
+```
+
+Se abrirá una ventana con un punto rojo que representa el robot y los valores de telemetría que se actualizan cada 15 segundos.
+Si el usuario tiene permisos de administrador (`is_admin = True`), se mostrarán botones para mover el robot.
+
+---
+
+### 5.4. Ejecutar el cliente en Java (versión consola)
+
+Compilar:
+
+```
+javac ClientJava.java
+```
+
+Ejecutar:
+
+```
+java ClientJava
+```
+
+El cliente se conectará al servidor, iniciará sesión y solicitará información de telemetría.
+
+---
+
+### 5.5. Ejecutar el cliente en Java (versión gráfica)
+
+Compilar:
+
+```
+javac ClientGUI.java
+```
+
+Ejecutar:
+
+```
+java ClientGUI
+```
+
+El programa abrirá una ventana en la que se visualiza el robot y los valores de temperatura, humedad, presión y CO₂.
+El movimiento del robot se controla con las teclas de dirección del teclado.
+
+---
+
+## 6. Pruebas de funcionamiento
+
+1. Iniciar primero el servidor (`server.exe`).
+2. Luego ejecutar los clientes (Python o Java) en ventanas separadas.
+3. Verificar en la consola del servidor que se registren los eventos de conexión y transmisión.
+4. Los datos de telemetría deben mostrarse actualizados cada 15 segundos.
+5. El archivo `logs.txt` debe contener los registros de todas las conexiones y comandos enviados.
+
+---
+
+## 7. Conclusiones
+
+El sistema RTLP implementado permite establecer una comunicación estable y bidireccional entre un servidor y múltiples clientes a través del protocolo TCP.
+Se validó el correcto envío y recepción de comandos entre los módulos, así como la actualización periódica de datos de telemetría.
+El uso de interfaces gráficas en Python y Java permitió una visualización sencilla del estado del robot y sus variables ambientales.
+El proyecto demuestra la aplicación práctica de los fundamentos de comunicación en red mediante sockets y el diseño de protocolos de aplicación personalizados.
+
+---
+
+¿Quieres que te lo deje también con formato `.txt` o `.pdf` para adjuntarlo directamente a la entrega? Puedo generarlo y dejarlo listo para descargar.

@@ -65,7 +65,7 @@ public class ClientGUI extends JFrame {
 
     private void conectarServidor() {
         try {
-            socket = new Socket("127.0.0.1", 8080);
+            socket = new Socket("100.24.14.26", 8080);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
 
